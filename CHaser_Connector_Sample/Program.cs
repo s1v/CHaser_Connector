@@ -52,23 +52,23 @@ else Console.WriteLine($"表示名: {name}\n");
 //コネクターの生成
 Connector connector = new Connector(ip, int.Parse(port), name);
 
+while (true) //接続に成功するまでリトライする
+{
+    try
+    {
+        connector.Connect(); //サーバーへ接続
+        break; //成功したら脱ループ
+    }
+    catch (ConnectException)
+    {
+        //リトライ表示
+        Console.WriteLine("(Press \"Enter\" to retry)");
+        Console.ReadLine();
+    }
+}
+
 try
 {
-    while(true) //接続に成功するまでリトライする
-    {
-        try
-        {
-            connector.Connect(); //サーバーへ接続
-            break; //成功したら脱ループ
-        }
-        catch (ConnectException)
-        {
-            //リトライ表示
-            Console.WriteLine("(Press \"Enter\" to retry)");
-            Console.ReadLine();
-        }
-    }
-
     Client.Run(connector); //Clientの実行
 }
 catch (CHaserConnectorException e)
