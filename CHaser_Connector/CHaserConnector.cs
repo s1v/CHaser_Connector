@@ -7,6 +7,9 @@ public class Connector: IDisposable
 {
     public int CurrentTurn { get; private set; } = 1;
 
+    private string ip { get; init; }
+    private int port { get; init; }
+    private string name { get; init; }
     private bool doLogging { get; init; }
 
     private Socket socketClient;
@@ -20,8 +23,12 @@ public class Connector: IDisposable
     /// <param name="doLogging">ログ出力するかい？</param>
     public Connector(string ip, int port, string name, bool doLogging = true)
     {
+        this.ip = ip;
+        this.port = port;
+        this.name = name;
         this.doLogging = doLogging;
-        this.socketClient = Connect(ip, port, name);
+
+        this.socketClient = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
     }
 
     /// <summary>
@@ -130,12 +137,11 @@ public class Connector: IDisposable
     /// CHaserサーバーに接続する
     /// </summary>
     /// <exception cref="ConnectException">サーバー接続失敗時に発生</exception>
-    private Socket Connect(string ip, int port, string name)
+    public Socket Connect()
     {
         try
         {
             //接続
-            socketClient = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             socketClient.Connect(new IPEndPoint(IPAddress.Parse(ip), port));
 
             //クライアント情報送信
@@ -172,6 +178,8 @@ public class Connector: IDisposable
         {
             socketClient.Shutdown(SocketShutdown.Both);
             socketClient.Close();
+            socketClient.Dispose();
+            this.Dispose();
         }
         catch
         {
@@ -230,6 +238,8 @@ public class Connector: IDisposable
     {
         try
         {
+            if (!socketClient.IsBound) throw new UnconnectedException();
+
             if (order == OrderName.GetReady)
             {
                 if (!(Receive()[0] == ControlCode.TurnStart)) //接続確認

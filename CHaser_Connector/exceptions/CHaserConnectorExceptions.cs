@@ -6,6 +6,14 @@
         public CHaserConnectorException(string message , Exception inner) : base(message, inner) { }
     }
 
+    public class UnconnectedException : CHaserConnectorException
+    {
+        public UnconnectedException() : base(
+            "Connector is unconnected to server.\n +" +
+            "Do \"Connect()\" method beforehand."
+        ) { }
+    }
+
     /// <summary>
     /// CHaserサーバー接続失敗時に発生させるException
     /// </summary>

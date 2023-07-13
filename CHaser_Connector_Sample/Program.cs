@@ -49,16 +49,16 @@ if (name is null)
 }
 else Console.WriteLine($"表示名: {name}\n");
 
+//コネクターの生成
+Connector connector = new Connector(ip, int.Parse(port), name);
+
 try
 {
-    Connector connector;
-
     while(true) //接続に成功するまでリトライする
     {
         try
         {
-            //Connectorの初期化
-            connector = new Connector(ip, int.Parse(port), name);
+            connector.Connect(); //サーバーへ接続
             break; //成功したら脱ループ
         }
         catch (ConnectException)
@@ -93,4 +93,8 @@ catch (Exception e)
         $"(Press \"Enter\" to exit)"
     );
     Console.ReadLine();
+}
+finally
+{
+    connector.Dispose();
 }
