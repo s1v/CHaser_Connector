@@ -256,7 +256,7 @@ public class Connector: IDisposable
             if (doLogging)
             {
                 if (++CurrentTurn % 2 == 0) Console.WriteLine("************************************\n");
-                Console.WriteLine($"Turn{CurrentTurn / 2}: {order.ToString()}");
+                Console.WriteLine($"Turn.{CurrentTurn / 2}: {order.ToString()}");
             }
 
             //サーバーから情報受信
