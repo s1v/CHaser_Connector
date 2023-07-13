@@ -15,6 +15,7 @@
     <Company />
     <Product>CHaser</Product>
     <Title>CHaser.Connector</Title>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
