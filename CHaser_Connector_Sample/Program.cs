@@ -51,13 +51,32 @@ else Console.WriteLine($"表示名: {name}\n");
 
 try
 {
-    //CHaserクライアントを初期化して、プログラムを実行
-    Client.Run(new Connector(ip, int.Parse(port), name));
+    //Connectorの初期化
+    Connector connector = new Connector(ip, int.Parse(port), name);
+
+    while(true) //接続に成功するまでリトライする
+    {
+        try
+        {
+            //サーバー接続試行
+            connector.Connect();
+            break; //成功したら脱ループ
+        }
+        catch (ConnectException)
+        {
+            //リトライ表示
+            Console.WriteLine("(Press \"Enter\" to retry)");
+            Console.ReadLine();
+        }
+    }
+
+    Client.Run(connector); //Clientプログラムの実行
 }
 catch (CHaserConnectorException e)
 {
     //意図したExceptionの場合
     Console.WriteLine(e.Message);
+    Console.WriteLine("(Press \"Enter\" to exit)");
     Console.ReadLine();
 }
 catch (Exception e)
