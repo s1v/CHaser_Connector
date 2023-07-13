@@ -286,12 +286,10 @@ public class Connector: IDisposable
         }
         catch (CHaserConnectorException)
         {
-            Dispose(); //接続は必ず閉じる
             throw;
         }
         catch (Exception e)
         {
-            Dispose(); //接続は必ず閉じる
             throw new UnknownException(e);
         }
     }
