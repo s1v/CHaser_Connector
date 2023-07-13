@@ -1,4 +1,4 @@
-[![NuGet Downloads](https://img.shields.io/nuget/dt/CHaser_CSharp_Client?label=nuget%20Downloads&color=004880&logo=nuget&style=flat-square)](https://www.nuget.org/packages/CHaser_CSharp_Client/)  
+[![NuGet Downloads](https://img.shields.io/nuget/dt/CHaser_Connector?label=nuget%20Downloads&color=004880&logo=nuget&style=flat-square)](https://www.nuget.org/packages/CHaser_Connector/)  
 
 ## CHaser_Connector
 CHaserのC#クライアント向け通信ライブラリです。  

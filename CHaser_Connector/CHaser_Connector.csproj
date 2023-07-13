@@ -4,6 +4,24 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <Description>CHaserのC#クライアント向け通信ライブラリ</Description>
+    <PackageProjectUrl>https://github.com/s1v/CHaser_Connector</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/s1v/CHaser_Connector</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>chaser</PackageTags>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <Authors>s1v</Authors>
+    <Company />
+    <Product>CHaser</Product>
+    <Title>CHaser.Connector</Title>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
 
 </Project>
