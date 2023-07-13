@@ -3,13 +3,10 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 
-public class Connector
+public class Connector: IDisposable
 {
     public int CurrentTurn { get; private set; } = 1;
 
-    private string ip { get; init; }
-    private int port { get; init; }
-    private string name { get; init; }
     private bool doLogging { get; init; }
 
     private Socket socketClient;
@@ -23,10 +20,8 @@ public class Connector
     /// <param name="doLogging">ログ出力するかい？</param>
     public Connector(string ip, int port, string name, bool doLogging = true)
     {
-        this.ip = ip;
-        this.port = port;
-        this.name = name;
         this.doLogging = doLogging;
+        this.socketClient = Connect(ip, port, name);
     }
 
     /// <summary>
@@ -135,7 +130,7 @@ public class Connector
     /// CHaserサーバーに接続する
     /// </summary>
     /// <exception cref="ConnectException">サーバー接続失敗時に発生</exception>
-    public void Connect()
+    private Socket Connect(string ip, int port, string name)
     {
         try
         {
@@ -153,6 +148,8 @@ public class Connector
                     "Plz wait game start...\n"
                 );
             }
+
+            return socketClient;
         }
         catch (SocketException e)
         {
@@ -169,7 +166,7 @@ public class Connector
     /// <summary>
     /// サーバー接続を閉じる
     /// </summary>
-    public void Disconnect()
+    public void Dispose()
     {
         try
         {
@@ -279,12 +276,12 @@ public class Connector
         }
         catch (CHaserConnectorException)
         {
-            Disconnect(); //接続は必ず閉じる
+            Dispose(); //接続は必ず閉じる
             throw;
         }
         catch (Exception e)
         {
-            Disconnect(); //接続は必ず閉じる
+            Dispose(); //接続は必ず閉じる
             throw new UnknownException(e);
         }
     }
