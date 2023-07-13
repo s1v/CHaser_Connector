@@ -1,9 +1,9 @@
-﻿using exceptions;
+﻿using CHaserConnector.exception;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
 
-public class CHaserConnector
+public class Connector
 {
     public int CurrentTurn { get; private set; } = 1;
 
@@ -21,7 +21,7 @@ public class CHaserConnector
     /// <param name="port">接続先ポート番号</param>
     /// <param name="name">表示名</param>
     /// <param name="doLogging">ログ出力するかい？</param>
-    public CHaserConnector(string ip, int port, string name, bool doLogging = true)
+    public Connector(string ip, int port, string name, bool doLogging = true)
     {
         this.ip = ip;
         this.port = port;
@@ -277,7 +277,7 @@ public class CHaserConnector
                     throw new UnknownException();
             }
         }
-        catch (CHaserClientException)
+        catch (CHaserConnectorException)
         {
             Disconnect(); //接続は必ず閉じる
             throw;

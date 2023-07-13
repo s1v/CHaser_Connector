@@ -1,4 +1,4 @@
-﻿namespace exceptions
+﻿namespace CHaserConnector.exception
 {
     public abstract class CHaserConnectorException : Exception
     {
