@@ -83,7 +83,7 @@ catch (Exception e)
     //意図せぬExceptionの場合
     Console.WriteLine(
         $"Occurred critical error.\n" +
-        $"Plz report to GitHub Issues: https://github.com/s1v/CHaser_CSharp/issues\n" +
+        $"Plz report to GitHub Issues: https://github.com/s1v/CHaser_Connector/issues\n" +
         $"****************************\n" +
         $"ErrorMessage:\n" +
         $"{e.Message}\n" +
