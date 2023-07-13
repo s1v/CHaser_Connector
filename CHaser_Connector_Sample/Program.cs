@@ -70,7 +70,7 @@ try
         }
     }
 
-    Client.Run(connector); //Clientプログラムの実行
+    Client.Run(connector); //Clientの実行
 }
 catch (CHaserConnectorException e)
 {
