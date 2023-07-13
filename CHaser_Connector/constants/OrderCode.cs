@@ -1,0 +1,20 @@
+﻿internal enum OrderCode
+{
+    gr,
+    wu,
+    wd,
+    wl,
+    wr,
+    lu,
+    ld,
+    ll,
+    lr,
+    su,
+    sd,
+    sl,
+    sr,
+    pu,
+    pd,
+    pl,
+    pr,
+}
