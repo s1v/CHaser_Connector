@@ -51,15 +51,14 @@ else Console.WriteLine($"表示名: {name}\n");
 
 try
 {
-    //Connectorの初期化
-    Connector connector = new Connector(ip, int.Parse(port), name);
+    Connector connector;
 
     while(true) //接続に成功するまでリトライする
     {
         try
         {
-            //サーバー接続試行
-            connector.Connect();
+            //Connectorの初期化
+            connector = new Connector(ip, int.Parse(port), name);
             break; //成功したら脱ループ
         }
         catch (ConnectException)
