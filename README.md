@@ -12,3 +12,13 @@ C#でCHaserのコードを手っ取り早く書きたい方は[こちら](https:
 
 ## リファレンス
 [Wiki](https://github.com/s1v/CHaser_Connector/wiki)参照
+
+## Usage
+```
+CSharp
+Connector connector = new Connector(ip, port, name);
+connector.Connect();
+
+connector.GetReady();
+connector.LookUp();
+```
