@@ -15,6 +15,8 @@ C#でCHaserのコードを手っ取り早く書きたい方は[こちら](https:
 
 ## Usage
 ```C#
+﻿using CHaserConnector;
+
 Connector connector = new Connector(ip, port, name);
 connector.Connect();
 
