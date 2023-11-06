@@ -69,7 +69,7 @@ while (true) //接続に成功するまでリトライする
 
 try
 {
-    Client.Run(connector); //Clientの実行
+    Client.Run(connector.GetController()); //Clientの実行
 }
 catch (CHaserConnectorException e)
 {

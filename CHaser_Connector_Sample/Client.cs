@@ -1,33 +1,33 @@
 ﻿public static class Client
 {
-    public static void Run(Connector connector)
+    public static void Run(Controller controller)
     {
         //ここにコードを書きます。
         while (true)
         {
-            connector.GetReady();
-            connector.SearchUp();
+            controller.GetReady();
+            controller.SearchUp();
 
-            connector.GetReady();
-            connector.SearchLeft();
+            controller.GetReady();
+            controller.SearchLeft();
 
-            connector.GetReady();
-            connector.SearchDown();
+            controller.GetReady();
+            controller.SearchDown();
 
-            connector.GetReady();
-            connector.SearchRight();
+            controller.GetReady();
+            controller.SearchRight();
 
-            connector.GetReady();
-            connector.LookUp();
+            controller.GetReady();
+            controller.LookUp();
 
-            connector.GetReady();
-            connector.LookLeft();
+            controller.GetReady();
+            controller.LookLeft();
 
-            connector.GetReady();
-            connector.LookDown();
+            controller.GetReady();
+            controller.LookDown();
 
-            connector.GetReady();
-            connector.LookRight();
+            controller.GetReady();
+            controller.LookRight();
         }
     }
 }
