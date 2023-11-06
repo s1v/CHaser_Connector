@@ -11,11 +11,10 @@ public class Connector: IDisposable
     protected int port { get; init; }
     protected string name { get; init; }
     protected bool doLogging { get; init; }
-
-    protected Socket socketClient;
+    protected Socket socketClient { get; init; }
 
     /// <summary>
-    /// CHaser接続クライアント
+    /// CHaserサーバー接続クライアント
     /// </summary>
     /// <param name="ip">接続先IPアドレス</param>
     /// <param name="port">接続先ポート番号</param>
@@ -30,108 +29,6 @@ public class Connector: IDisposable
 
         this.socketClient = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
     }
-
-    /// <summary>
-    /// 周囲の情報を取得します。必ずターンのはじめに実⾏必要があります。
-    /// </summary>
-    /// <returns>周囲9マスの情報</returns>
-    public FieldObject[] GetReady() => Order(OrderName.GetReady);
-
-    /// <summary>
-    /// 上に移動します。
-    /// </summary>
-    /// <returns></returns>
-    public FieldObject[] WalkUp() => Order(OrderName.WalkUp);
-
-    /// <summary>
-    /// 下に移動します。
-    /// </summary>
-    /// <returns></returns>
-    public FieldObject[] WalkDown() => Order(OrderName.WalkDown);
-
-    /// <summary>
-    /// 左に移動します。
-    /// </summary>
-    /// <returns></returns>
-    public FieldObject[] WalkLeft() => Order(OrderName.WalkLeft);
-
-    /// <summary>
-    /// 右に移動します。
-    /// </summary>
-    /// <returns></returns>
-    public FieldObject[] WalkRight() => Order(OrderName.WalkRight);
-
-    /// <summary>
-    /// 正⽅形状に上9マスの情報を取得します。
-    /// </summary>
-    /// <returns>上9マスの情報(正⽅形状)</returns>
-    public FieldObject[] LookUp() => Order(OrderName.LookUp);
-
-    /// <summary>
-    /// 正⽅形状に下9マスの情報を取得します。
-    /// </summary>
-    /// <returns>下9マスの情報(正⽅形状)</returns>
-    public FieldObject[] LookDown() => Order(OrderName.LookDown);
-
-    /// <summary>
-    /// 正⽅形状に左9マスの情報を取得します。
-    /// </summary>
-    /// <returns>左9マスの情報(正⽅形状)</returns>
-    public FieldObject[] LookLeft() => Order(OrderName.LookLeft);
-
-    /// <summary>
-    /// 正⽅形状に右9マスの情報を取得します。
-    /// </summary>
-    /// <returns>右9マスの情報(正⽅形状)</returns>
-    public FieldObject[] LookRight() => Order(OrderName.LookRight);
-
-    /// <summary>
-    /// 直線状に上9マスの情報を取得します。
-    /// </summary>
-    /// <returns>上9マスの情報(直線状)</returns>
-    public FieldObject[] SearchUp() => Order(OrderName.SearchUp);
-
-    /// <summary>
-    /// 直線状に下9マスの情報を取得します。
-    /// </summary>
-    /// <returns>下9マスの情報(直線状)</returns>
-    public FieldObject[] SearchDown() => Order(OrderName.SearchDown);
-
-    /// <summary>
-    /// 直線状に左9マスの情報を取得します。
-    /// </summary>
-    /// <returns>左9マスの情報(直線状)</returns>
-    public FieldObject[] SearchLeft() => Order(OrderName.SearchLeft);
-
-    /// <summary>
-    /// 直線状に右9マスの情報を取得します。
-    /// </summary>
-    /// <returns>右9マスの情報(直線状)</returns>
-    public FieldObject[] SearchRight() => Order(OrderName.SearchRight);
-
-    /// <summary>
-    /// 上にブロックを置きます。
-    /// </summary>
-    /// <returns>周囲9マスの情報</returns>
-    public FieldObject[] PutUp() => Order(OrderName.PutUp);
-
-    /// <summary>
-    /// 下にブロックを置きます。
-    /// </summary>
-    /// <returns>周囲9マスの情報</returns>
-    public FieldObject[] PutDown() => Order(OrderName.PutDown);
-
-    /// <summary>
-    /// 左にブロックを置きます。
-    /// </summary>
-    /// <returns>周囲9マスの情報</returns>
-    public FieldObject[] PutLeft() => Order(OrderName.PutLeft);
-
-    /// <summary>
-    /// 右にブロックを置きます。
-    /// </summary>
-    /// <returns>周囲9マスの情報</returns>
-    public FieldObject[] PutRight() => Order(OrderName.PutRight);
 
     /// <summary>
     /// CHaserサーバーに接続する
@@ -188,6 +85,14 @@ public class Connector: IDisposable
     }
 
     /// <summary>
+    /// 操作用オブジェクトを取得する
+    /// </summary>
+    /// <returns>操作用オブジェクト</returns>
+    public Controller GetController() {
+        return new Controller(this);
+    }
+
+    /// <summary>
     /// CHaserサーバーへ文字列を送信する
     /// </summary>
     /// <param name="sendString">送信する文字列</param>
@@ -234,7 +139,7 @@ public class Connector: IDisposable
     /// <exception cref="DesyncException">サーバーとの同期失敗時に発生</exception>
     /// <exception cref="GameSetException">ゲーム終了時に発生</exception>
     /// <exception cref="UnknownException">内部エラー発生時に発生</exception>
-    protected FieldObject[] Order(OrderName order)
+    public FieldObject[] Order(OrderName order)
     {
         try
         {
