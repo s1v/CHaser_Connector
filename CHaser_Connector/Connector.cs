@@ -5,14 +5,14 @@ using System.Text;
 
 public class Connector: IDisposable
 {
-    public int CurrentTurn { get; private set; } = 1;
+    public int CurrentTurn { get; protected set; } = 1;
 
-    private string ip { get; init; }
-    private int port { get; init; }
-    private string name { get; init; }
-    private bool doLogging { get; init; }
+    protected string ip { get; init; }
+    protected int port { get; init; }
+    protected string name { get; init; }
+    protected bool doLogging { get; init; }
 
-    private Socket socketClient;
+    protected Socket socketClient;
 
     /// <summary>
     /// CHaser接続クライアント
@@ -192,7 +192,7 @@ public class Connector: IDisposable
     /// </summary>
     /// <param name="sendString">送信する文字列</param>
     /// <exception cref="ConnectException">サーバー接続失敗時に発生</exception>
-    private void Send(string sendString)
+    protected void Send(string sendString)
     {
         try
         {
@@ -211,7 +211,7 @@ public class Connector: IDisposable
     /// <param name="orderString">送信する命令</param>
     /// <returns>受信した情報</returns>
     /// <exception cref="ConnectException">サーバー接続失敗時に発生</exception>
-    private char[] Receive()
+    protected char[] Receive()
     {
         try
         {
@@ -234,7 +234,7 @@ public class Connector: IDisposable
     /// <exception cref="DesyncException">サーバーとの同期失敗時に発生</exception>
     /// <exception cref="GameSetException">ゲーム終了時に発生</exception>
     /// <exception cref="UnknownException">内部エラー発生時に発生</exception>
-    private FieldObject[] Order(OrderName order)
+    protected FieldObject[] Order(OrderName order)
     {
         try
         {
@@ -294,7 +294,7 @@ public class Connector: IDisposable
         }
     }
 
-    private void WriteFieldInfo(FieldObject[] infos, OrderName order)
+    protected void WriteFieldInfo(FieldObject[] infos, OrderName order)
     {
         int i = 0;
         foreach (FieldObject info in infos)

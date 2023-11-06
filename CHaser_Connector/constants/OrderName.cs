@@ -1,4 +1,4 @@
-﻿internal enum OrderName
+﻿public enum OrderName
 {
     GetReady,
     WalkUp,

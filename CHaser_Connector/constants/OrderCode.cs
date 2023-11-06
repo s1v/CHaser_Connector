@@ -1,4 +1,4 @@
-﻿internal enum OrderCode
+﻿public enum OrderCode
 {
     gr,
     wu,
