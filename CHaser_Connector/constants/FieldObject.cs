@@ -19,4 +19,8 @@
     /// アイテム
     /// </summary>
     item,
+    /// <summary>
+    /// 自機
+    /// </summary>
+    me,
 }
